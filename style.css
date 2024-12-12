@@ -1,0 +1,142 @@
+@import url(./normalize.css);
+* {
+    box-sizing: border-box;
+}
+
+.sticky_sheet {
+    top: 0;
+    position: sticky;
+    z-index: 200;
+}
+
+.top_bar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 200;
+    background-color: #fff;
+    display: flex;
+    padding: 5px 10px;
+    height:50px;
+    border-bottom: 2px solid #ccc;
+}
+.top_bar > .menu_button_top {
+    cursor: pointer;
+    background-image: repeating-linear-gradient(#000, #000 2px, transparent 2px 13px);
+    padding: 5px 0;
+    aspect-ratio: 1;
+    background-clip: content-box;
+    background-position: 0 5px;
+    margin-left: 20px;
+}
+.menu_top {
+    bottom: calc(100% - 50px);
+    transition: all .3s;
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    left: 20px;
+    background-color: #fff;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+}
+.menu_top.active {
+}
+
+.content_wrapper {
+    padding: 100px 50px;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.content_grid {
+    width: min(100%, 1600px);
+    display: flex;
+    gap: 75px;
+}
+.navigation {
+    min-width: 250px;
+    display: flex;
+    position: sticky;
+    top: 150px;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+.navigation > div {
+    font-family: math;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0 25px;
+    width: 100%;
+    background-color: #f8f8f8;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 12.5px;
+}
+.navigation > div:hover {
+    background-color: #e7e7e7;
+}
+.content {
+    width: 100%;
+}
+.content > div {
+    display: none;
+    min-height: 600px;
+}
+.content > div[tag="Наши кальяны"] {
+    gap: 50px;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.hookah_card {
+    overflow: hidden;
+    border: 2px solid;
+    display: flex;
+    border-radius: 20px;
+    height:400px;
+    width:250px;
+    background-color: #7e7e7e;
+    flex-direction: column;
+}
+.hookah_card > .card_image {
+    height: 100%;
+    width: 100%;
+}
+.hookah_card > .card_footer {
+    min-height: 50px;
+    width: 100%;
+    background-color: #fff;
+    font-family: math;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hookah_card > .card_footer:hover {
+    text-decoration: underline;
+}
+.hookah_card > .card_footer::after {
+    content: '';
+    display: block;
+    width: 25px;
+    aspect-ratio: 1;
+    background-image: url(./icon.svg);
+}
+
+.content_grid[active="Наши кальяны"] .content > div[tag="Наши кальяны"] {
+    display: flex;
+}
+.content_grid[active="Услуги и тарифы"] .content > div[tag="Услуги и тарифы"] {
+    display: block;
+    border: 2px solid #7e7e7e
+}
+.content_grid[active="Инструкции"] .content > div[tag="Инструкции"] {
+    display: block;
+    border: 2px solid #7e7e7e
+}
