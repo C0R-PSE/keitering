@@ -21,14 +21,13 @@ function open_tab(tab){
 }
 function checkGridWidth() {
     const contentWidth = Math.min(window.innerWidth - 100, 1600) - 325
-    if (contentWidth >= 1150) {
-        hookahs.style.width = "1150px"
-    } else if (contentWidth >= 850) {
-        hookahs.style.width = "850px"
-    } else if (contentWidth >= 550) {
-        hookahs.style.width = "550px"
-    } else {
+    const max_columns = Math.floor((contentWidth - 250) / 300) + 1
+    if (max_columns <= 1) {
         hookahs.style.width = "250px"
+    } else if (max_columns > Object.keys(data.hookahs).length) {
+        hookahs.style.width = Object.keys(data.hookahs).length*300 - 50
+    } else {
+        hookahs.style.width = 250 + 300*(max_columns - 1)
     }
 }
 function show_info(hookah) {
