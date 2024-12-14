@@ -26,6 +26,7 @@ function open_tab(tab){
     navigation.querySelector('[tag="' + tab + '"]').classList.add("active")
     content_grid.querySelector('.content').querySelector('[tag="' + tab + '"]').classList.add("active")
 }
+open_tab('Наши кальяны')
 function checkGridWidth() {
     const contentWidth = Math.min(window.innerWidth - 100, 1600) - 325
     const max_columns = Math.floor((contentWidth - 250) / 300) + 1
