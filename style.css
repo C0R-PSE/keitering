@@ -18,6 +18,7 @@
     z-index: 200;
     background-color: #fff;
     display: flex;
+    justify-content: flex-end;
     padding: 5px 10px;
     height:50px;
     border-bottom: 2px solid #ccc;
@@ -29,7 +30,7 @@
     aspect-ratio: 1;
     background-clip: content-box;
     background-position: 0 5px;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 .menu_top {
     bottom: calc(100% - 50px);
@@ -37,7 +38,7 @@
     position: absolute;
     height: 300px;
     width: 400px;
-    left: 20px;
+    right: 20px;
     background-color: #fff;
     border-right: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
@@ -52,7 +53,7 @@
     justify-content: center;
 }
 .content_grid {
-    width: min(100%, 1600px);
+    width: min(100%, 1500px);
     display: flex;
     gap: 75px;
 }
@@ -66,20 +67,34 @@
     align-items: center;
 }
 .navigation > div {
+    transition: background .2s;
     font-family: math;
     text-transform: uppercase;
     cursor: pointer;
     padding: 0 20px;
     width: 100%;
+    background-image: linear-gradient(#00000010 0 100%);
     background-color: #f8f8f8;
+    background-position: -250 0, 0 0;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 12.5px;
+    background-repeat: no-repeat, repeat;
 }
-.navigation > div:hover {
-    background-color: #e7e7e7;
+.navigation > div:hover,
+.navigation > div.active {
+    background-position: 0 0, 0 0;
+}
+.navigation > div.active::after {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    content: '';
 }
 .content {
     width: 100%;
@@ -90,32 +105,18 @@
         min-height: 600px;
     }
 }
-.content_grid {
-    &[active="Услуги и тарифы"] .content > div[tag="Услуги и тарифы"],
-    &[active="Инструкции"] .content > div[tag="Инструкции"] {
+.content > div.active {
+    &:not([tag="Наши кальяны"]) {
         display: block;
-        border: 2px solid #7e7e7e
-    };
-    &[active="Наши кальяны"] .content > div[tag="Наши кальяны"] {
+        border: 2px solid #7e7e7e;
+    }
+    &[tag="Наши кальяны"] {
         display: grid;
         gap: 50px;
         grid-template-columns: repeat(auto-fit, 250px);
         background-image: url(./grid_bg.png);
         align-items: center;
         justify-items: center;
-    }
-}
-.content_grid {
-    &[active="Услуги и тарифы"] .navigation > div[tag="Услуги и тарифы"]::after,
-    &[active="Инструкции"] .navigation > div[tag="Инструкции"]::after,
-    &[active="Наши кальяны"] .navigation > div[tag="Наши кальяны"]::after {
-        border: solid black;
-        border-width: 0 2px 2px 0;
-        display: inline-block;
-        padding: 3px;
-        transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        content: '';
     }
 }
 
