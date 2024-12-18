@@ -5,6 +5,7 @@ const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const tabs = [...navigation.children]
+const instructions = [...content_grid.querySelector('.instructions').children]
 
 const data = await fetch('./data.json').then(resp => resp.json())
 //console.log(data)
@@ -55,6 +56,12 @@ for (var i in data.hookahs) {
     card_footer.innerText = data.hookahs[i].name
     hookah_card.appendChild(card_footer)
     hookah_card.addEventListener('click', (e) => {show_info(e.target)})
+}
+
+for (var i in instructions) {
+    instructions[i].querySelector('.instruction_header').addEventListener('click', (e) => {
+        e.target.closest('.instruction_wrapper').classList.toggle('active')
+    })
 }
 
 menu_button_top.addEventListener('click', () => {toggle_menu()})
