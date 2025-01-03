@@ -1,0 +1,12 @@
+name: Secrets and Enviromental Variables
+on:
+  workflow_dispatch
+jobs:
+  top-secret:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    env: 
+      MY_TEST_VAR: ${{ vars.TEST }}
+    steps:
+      - name: Read a variable
+        run: echo "MY testVar value is $MY_TEST_VAR"
