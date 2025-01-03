@@ -110,11 +110,17 @@
     }
 }
 .content > div.active {
-    &:not([tag="hookahs"]) {
+    &[tag="Тарифы и услуги"] {
         display: block;
         border: 2px solid #7e7e7e;
     }
-    &[tag="hookahs"] {
+    &[tag="Инструкции"] {
+        display: flex;
+        border: 2px solid #7e7e7e;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &[tag="Наши кальяны"] {
         display: grid;
         gap: 50px;
         grid-template-columns: repeat(auto-fit, 250px);
@@ -122,6 +128,30 @@
         align-items: center;
         justify-items: center;
     }
+}
+.instruction_wrapper {
+    display: grid;
+    grid-template-rows: auto 0fr;
+    transition: all .2s;
+    &.active  > .folding_content{
+        grid-template-rows: 1fr;
+    }
+}
+.instruction_header {
+    padding-left: 15px;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #e7e7e7;
+    justify-content: flex-start;
+    align-items: center;
+}
+.instruction_wrapper > .folding_content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease-in-out;
+    overflow: hidden;
 }
 
 .hookah_card {
