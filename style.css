@@ -105,22 +105,18 @@
 }
 .content > div {
     display: none;
-    &:not([tag="hookahs"]) {
-        min-height: 600px;
-    }
 }
 .content > div.active {
-    &[tag="Тарифы и услуги"] {
+    &.prices {
         display: block;
         border: 2px solid #7e7e7e;
     }
-    &[tag="Инструкции"] {
+    &.instructions {
         display: flex;
-        border: 2px solid #7e7e7e;
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
     }
-    &[tag="Наши кальяны"] {
+    &.hookahs {
         display: grid;
         gap: 50px;
         grid-template-columns: repeat(auto-fit, 250px);
@@ -129,15 +125,19 @@
         justify-items: center;
     }
 }
-.instruction_wrapper {
+.instruction {
+    font-family: sans-serif;
+    position: relative;
+    border-radius: 10px;
+    background-color: #d8d8d8;
+    min-height: 50px;
     display: grid;
-    grid-template-rows: auto 0fr;
-    transition: all .2s;
     &.active  > .folding_content{
-        grid-template-rows: 1fr;
+        height: calc-size(auto, size);
     }
 }
 .instruction_header {
+    cursor: pointer;
     padding-left: 15px;
     display: flex;
     width: 100%;
@@ -147,11 +147,15 @@
     justify-content: flex-start;
     align-items: center;
 }
-.instruction_wrapper > .folding_content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s ease-in-out;
+.instruction > .folding_content {
+    position: relative;
+    display: block;
+    height: 0px;
     overflow: hidden;
+    transition: height .2s;
+}
+.instruction > .folding_content > .instruction_content {
+    padding: 15px;
 }
 
 .hookah_card {

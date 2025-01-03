@@ -1,9 +1,19 @@
+console.log(
+    await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/', {
+        owner: 'C0R-PSE',
+        repo: 'keitering',
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+    }).then(resp => resp.json())
+)
 const menu_button_top = document.querySelector('.menu_button_top')
 const menu = document.querySelector('.menu_top')
 const content_grid = document.querySelector('.content_grid')
-const hookahs = content_grid.querySelector('[tag="hookahs"]')
+const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
+const instructions = content_grid.querySelector('.instructions')
 
 const data = await fetch('./data.json').then(resp => resp.json())
 //console.log(data)
@@ -24,7 +34,7 @@ function open_tab(tab){
         currently_active[i].classList.remove('active')
     }
     navigation.querySelector('[tag="' + tab + '"]').classList.add("active")
-    content_grid.querySelector('.content').querySelector('[tag="' + tab + '"]').classList.add("active")
+    content_grid.querySelector('.content').querySelector('.' + tab).classList.add("active")
 }
 function checkGridWidth() {
     const contentWidth = Math.min(window.innerWidth - 100, 1600) - 325
@@ -40,9 +50,6 @@ function checkGridWidth() {
 function show_info(event, hookah) {
     info_sheet.classList.add('active')
 }
-Element.prototype.addEditableListener = function(type, func) {
-    this.addEventListener('click', func)
-}
 
 menu_button_top.addEventListener('click', () => {toggle_menu()})
 window.addEventListener('scroll', () => {hide_menu()})
@@ -52,7 +59,8 @@ for (var i in data.hookahs) {
     hookah_card.classList.add('hookah_card')
     hookah_card.setAttribute('hookahId', i)
     hookahs.appendChild(hookah_card)
-    const card_image = document.createElement('div')
+    const card_image = document.createElement('img')
+    card_image.src = "https://disk.yandex.ru/i/VcMKMeO5sJ-aKg"
     card_image.classList.add("card_image")
     hookah_card.appendChild(card_image)
     const card_footer = document.createElement('div')
@@ -89,7 +97,13 @@ for (var i in data.navbar) {
     }
     navigation.appendChild(tab)
 }
-open_tab('hookahs')
+
+for (var i in [...instructions.children]) {
+    instructions.children[i].querySelector('.instruction_header').addEventListener('click', (e) => {
+        e.target.closest('.instruction').classList.toggle('active')
+    })
+}
+//open_tab('hookahs')
 checkGridWidth()
 
 
