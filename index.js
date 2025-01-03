@@ -4,8 +4,6 @@ const content_grid = document.querySelector('.content_grid')
 const hookahs = content_grid.querySelector('[tag="hookahs"]')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
-const tabs = [...navigation.children]
-const instructions = [...content_grid.querySelector('.instructions').children]
 
 const data = await fetch('./data.json').then(resp => resp.json())
 //console.log(data)
@@ -74,16 +72,22 @@ for (var i in data.hookahs) {
     })
 }
 
-for (var i in instructions) {
-    instructions[i].querySelector('.instruction_header').addEventListener('click', (e) => {
-        e.target.closest('.instruction_wrapper').classList.toggle('active')
+for (var i in data.navbar) {
+    const tab = document.createElement('div')
+    tab.setAttribute('tag', data.navbar[i].tag)
+    const label = document.createElement('div')
+    label.classList.add('label')
+    label.innerText = data.navbar[i].name
+    tab.appendChild(label)
+    tab.addEventListener('click', (e) => {
+        if (!e.target.hasAttribute('contenteditable')) {
+            open_tab(e.target.closest('.navigation > div').getAttribute('tag'))
+        }
     })
-}
-
-menu_button_top.addEventListener('click', () => {toggle_menu()})
-window.addEventListener('scroll', () => {hide_menu()})
-for (var i in tabs) {
-    tabs[i].addEventListener('click', (e) => {open_tab(e.target.getAttribute('tag'))})
+    if (admin_rights) {
+        label.setAttribute('contenteditable', '')
+    }
+    navigation.appendChild(tab)
 }
 open_tab('hookahs')
 checkGridWidth()
