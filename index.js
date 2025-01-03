@@ -1,12 +1,4 @@
-const token = "g" +
-"it" +
-"hu" +
-"b_pa" +
-"t_11AWK4SAQ0kTdS" +
-"GkLnqzc5_JT6" +
-"kXt8V0cpSPqX6zP9"
-+ "EiCjnGSv2" +
-"Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
+const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
 
 const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
     headers: {"Authorization": "Bearer " + token}
