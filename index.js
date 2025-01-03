@@ -7,7 +7,6 @@ for (var i in hookahs_images_data) {
         hookahs_images[hookahs_images_data[i].name].push(hookah_query[k].name)
     }
 }
-console.log(hookahs_images)
 const menu_button_top = document.querySelector('.menu_button_top')
 const menu = document.querySelector('.menu_top')
 const content_grid = document.querySelector('.content_grid')
@@ -16,7 +15,11 @@ const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
 
-const data = await fetch('./data.json').then(resp => resp.json())
+const data = await fetch('https://keitering.d-b-17f.workers.dev/', {
+    method:"POST",
+    query:"get_data"
+}).then(resp => resp.json())
+console.log(data)
 //console.log(data)
 
 const admin_rights = true
@@ -61,7 +64,10 @@ for (var i in data.hookahs) {
     hookah_card.setAttribute('hookahId', i)
     hookahs.appendChild(hookah_card)
     const card_image = document.createElement('img')
-    card_image.src = "./images/hookahs/" + hookahs_images[data.hookahs[i].name][0]
+    if (typeof(hookahs_images[data.hookahs[i].name]) != "undefined") {
+        card_image.src = "./images/hookahs/" + data.hookahs[i].name + "/" + hookahs_images[data.hookahs[i].name][0]
+        //card_image.style.backgroundImage = "url('./images/hookahs/" + data.hookahs[i].name + "/" + hookahs_images[data.hookahs[i].name][0] + "')"
+    }
     card_image.classList.add("card_image")
     hookah_card.appendChild(card_image)
     const card_footer = document.createElement('div')

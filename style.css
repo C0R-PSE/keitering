@@ -159,6 +159,7 @@
 }
 
 .hookah_card {
+    position: relative;
     user-select: none;
     cursor: pointer;
     overflow: hidden;
@@ -172,13 +173,22 @@
     transition: transform .1s;
 }
 .hookah_card > .card_image {
+    position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
 }
+.hookah_card img:not([src]) {
+    visibility: hidden;
+}
 .hookah_card > .card_footer {
+    position: absolute;
+    bottom: 0;
     min-height: 50px;
     width: 100%;
-    background-color: #fff;
+    background-color: #00000060;
+    color: #fff;
+    backdrop-filter: blur(5px);
     font-family: math;
     text-transform: uppercase;
     padding: 0 25px;
