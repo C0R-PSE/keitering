@@ -1,12 +1,13 @@
-console.log(
-    await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/', {
-        owner: 'C0R-PSE',
-        repo: 'keitering',
-        headers: {
-          'X-GitHub-Api-Version': '2022-11-28'
-        }
-    }).then(resp => resp.json())
-)
+const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs').then(resp => resp.json())
+var hookahs_images = {}
+for (var i in hookahs_images_data) {
+    hookahs_images[hookahs_images_data[i].name] = []
+    var hookah_query = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs/' + hookahs_images_data[i].name).then(resp => resp.json())
+    for (var k in hookah_query) {
+        hookahs_images[hookahs_images_data[i].name].push(hookah_query[k].name)
+    }
+}
+console.log(hookahs_images)
 const menu_button_top = document.querySelector('.menu_button_top')
 const menu = document.querySelector('.menu_top')
 const content_grid = document.querySelector('.content_grid')
@@ -60,7 +61,7 @@ for (var i in data.hookahs) {
     hookah_card.setAttribute('hookahId', i)
     hookahs.appendChild(hookah_card)
     const card_image = document.createElement('img')
-    card_image.src = "https://disk.yandex.ru/i/VcMKMeO5sJ-aKg"
+    card_image.src = "./images/hookahs/" + hookahs_images[data.hookahs[i].name][0]
     card_image.classList.add("card_image")
     hookah_card.appendChild(card_image)
     const card_footer = document.createElement('div')
