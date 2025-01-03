@@ -182,13 +182,12 @@
     visibility: hidden;
 }
 .hookah_card > .card_footer {
+    z-index: 300;
     position: absolute;
     bottom: 0;
     min-height: 50px;
     width: 100%;
-    background-color: #00000060;
     color: #fff;
-    backdrop-filter: blur(5px);
     font-family: math;
     text-transform: uppercase;
     padding: 0 25px;
@@ -202,12 +201,20 @@
 .hookah_card > .card_footer:hover {
     text-decoration: underline;
 }
-.hookah_card > .card_footer::after {
+.hookah_card > .card_footer > svg {
     content: '';
     display: block;
     width: 25px;
     aspect-ratio: 1;
-    background-image: url(./icon.svg);
+}
+.hookah_card::after { /* блюр */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    min-height: 50px;
+    width: 100%;
+    background-color: #00000060;
+    backdrop-filter: blur(5px);
 }
 .hookah_card:hover {
     transform: scale(1.05);
@@ -225,7 +232,7 @@
     opacity: 0;
     &.active {
         transition: opacity .25s;
-        z-index: 100;
+        z-index: 1000;
         opacity: 1;
         display: flex;
         justify-content: center;

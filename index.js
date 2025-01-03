@@ -1,8 +1,12 @@
-const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs').then(resp => resp.json())
+const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
+    headers: {"Authorization": "Bearer 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"}
+}).then(resp => resp.json())
 var hookahs_images = {}
 for (var i in hookahs_images_data) {
     hookahs_images[hookahs_images_data[i].name] = []
-    var hookah_query = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs/' + hookahs_images_data[i].name).then(resp => resp.json())
+    var hookah_query = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs/' + hookahs_images_data[i].name, {
+        headers: {"Authorization": "Bearer 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"}
+    }).then(resp => resp.json())
     for (var k in hookah_query) {
         hookahs_images[hookahs_images_data[i].name].push(hookah_query[k].name)
     }
@@ -81,6 +85,9 @@ for (var i in data.hookahs) {
     if (admin_rights) {
         label.setAttribute('contenteditable', '')
     }
+    const info_icon_buffer = document.createElement('div')
+    info_icon_buffer.innerHTML = '<svg viewBox="0 0 100 100"><use xlink:href="./icon.svg#info_icon"></use></svg>'
+    card_footer.append(info_icon_buffer.querySelector('svg'))
     hookah_card.addEventListener('click', (e) => {
         if (!e.target.hasAttribute('contenteditable')) {
             show_info(e.target.closest('.hookah_card'))
