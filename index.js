@@ -14,10 +14,11 @@ const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
-
 const data = await fetch('https://keitering.d-b-17f.workers.dev/', {
     method:"POST",
-    query:"get_data"
+    body:JSON.stringify({
+        query:"get_data"
+    })
 }).then(resp => resp.json())
 console.log(data)
 //console.log(data)
@@ -110,7 +111,7 @@ for (var i in [...instructions.children]) {
         e.target.closest('.instruction').classList.toggle('active')
     })
 }
-//open_tab('hookahs')
+open_tab('hookahs')
 checkGridWidth()
 
 
