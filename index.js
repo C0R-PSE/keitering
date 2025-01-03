@@ -1,11 +1,19 @@
+const data = await fetch('https://keitering.d-b-17f.workers.dev/', {
+    method:"POST",
+    body:JSON.stringify({
+        query:"get_data"
+    })
+}).then(resp => resp.json())
+console.log(data)
+
 const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
-    headers: {"Authorization": "Bearer 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"}
+    headers: {"Authorization": "Bearer " + data.github_token}
 }).then(resp => resp.json())
 var hookahs_images = {}
 for (var i in hookahs_images_data) {
     hookahs_images[hookahs_images_data[i].name] = []
     var hookah_query = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs/' + hookahs_images_data[i].name, {
-        headers: {"Authorization": "Bearer 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"}
+        headers: {"Authorization": "Bearer " + data.github_token}
     }).then(resp => resp.json())
     for (var k in hookah_query) {
         hookahs_images[hookahs_images_data[i].name].push(hookah_query[k].name)
@@ -18,13 +26,7 @@ const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
-const data = await fetch('https://keitering.d-b-17f.workers.dev/', {
-    method:"POST",
-    body:JSON.stringify({
-        query:"get_data"
-    })
-}).then(resp => resp.json())
-console.log(data)
+
 //console.log(data)
 
 const admin_rights = true
