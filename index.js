@@ -1,13 +1,14 @@
 const menu_button_top = document.querySelector('.menu_button_top')
 const menu = document.querySelector('.menu_top')
 const content_grid = document.querySelector('.content_grid')
-const hookahs = content_grid.querySelector('.hookahs')
+const hookahs = content_grid.querySelector('[tag="hookahs"]')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
-const tabs = [...navigation.children]
 
 const data = await fetch('./data.json').then(resp => resp.json())
 //console.log(data)
+
+const admin_rights = true
 
 function toggle_menu() {
     menu.classList.toggle('active')
@@ -20,13 +21,11 @@ function hide_menu() {
 function open_tab(tab){
     const currently_active = [...content_grid.getElementsByClassName('active')]
     for (var i in currently_active) {
-        console.log(currently_active[i])
         currently_active[i].classList.remove('active')
     }
     navigation.querySelector('[tag="' + tab + '"]').classList.add("active")
     content_grid.querySelector('.content').querySelector('[tag="' + tab + '"]').classList.add("active")
 }
-open_tab('Наши кальяны')
 function checkGridWidth() {
     const contentWidth = Math.min(window.innerWidth - 100, 1600) - 325
     const max_columns = Math.floor((contentWidth - 250) / 300) + 1
@@ -38,9 +37,15 @@ function checkGridWidth() {
         hookahs.style.width = 250 + 300*(max_columns - 1)
     }
 }
-function show_info(hookah) {
+function show_info(event, hookah) {
     info_sheet.classList.add('active')
 }
+Element.prototype.addEditableListener = function(type, func) {
+    this.addEventListener('click', func)
+}
+
+menu_button_top.addEventListener('click', () => {toggle_menu()})
+window.addEventListener('scroll', () => {hide_menu()})
 
 for (var i in data.hookahs) {
     const hookah_card = document.createElement('div')
@@ -52,17 +57,44 @@ for (var i in data.hookahs) {
     hookah_card.appendChild(card_image)
     const card_footer = document.createElement('div')
     card_footer.classList.add("card_footer")
-    card_footer.innerText = data.hookahs[i].name
     hookah_card.appendChild(card_footer)
-    hookah_card.addEventListener('click', (e) => {show_info(e.target)})
+    const label = document.createElement('div')
+    label.classList.add('label')
+    label.innerText = data.hookahs[i].name
+    card_footer.append(label)
+    if (admin_rights) {
+        label.setAttribute('contenteditable', '')
+    }
+    hookah_card.addEventListener('click', (e) => {
+        if (!e.target.hasAttribute('contenteditable')) {
+            show_info(e.target.closest('.hookah_card'))
+        }
+    })
 }
 
-menu_button_top.addEventListener('click', () => {toggle_menu()})
-window.addEventListener('scroll', () => {hide_menu()})
-for (var i in tabs) {
-    tabs[i].addEventListener('click', (e) => {open_tab(e.target.getAttribute('tag'))})
+for (var i in data.navbar) {
+    const tab = document.createElement('div')
+    tab.setAttribute('tag', data.navbar[i].tag)
+    const label = document.createElement('div')
+    label.classList.add('label')
+    label.innerText = data.navbar[i].name
+    tab.appendChild(label)
+    tab.addEventListener('click', (e) => {
+        if (!e.target.hasAttribute('contenteditable')) {
+            open_tab(e.target.closest('.navigation > div').getAttribute('tag'))
+        }
+    })
+    if (admin_rights) {
+        label.setAttribute('contenteditable', '')
+    }
+    navigation.appendChild(tab)
 }
+open_tab('hookahs')
 checkGridWidth()
+
+
+
+
 window.addEventListener('resize', () => {checkGridWidth()})
 info_sheet.addEventListener('click', (e) => {
     if (e.target==info_sheet) {info_sheet.classList.remove('active')}

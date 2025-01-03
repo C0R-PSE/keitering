@@ -1,4 +1,18 @@
 {
+    "navbar":[
+        {
+            "name" : "Наши кальяны",
+            "tag" : "hookahs"
+        },
+        {
+            "name" : "Услуги и тарифы",
+            "tag" : "prices"
+        },
+        {
+            "name" : "Инструкции",
+            "tag" : "instructions"
+        }
+    ],
     "hookahs":[
         {
             "name":"Кальян 1",
