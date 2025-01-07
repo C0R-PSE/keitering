@@ -164,7 +164,6 @@ window.addEventListener('resize', () => {checkGridWidth()})
 info_sheet.addEventListener('click', (e) => {
     if (e.target==info_sheet) {info_sheet.classList.remove('active')}
 })
-
 var editable_elements = [...document.querySelectorAll('[contenteditable]')]
 function toggle_edit_mode() {
     if (edit_mode == false) { // enter edit mode
@@ -182,3 +181,10 @@ function toggle_edit_mode() {
     }
 }
 document.querySelector('.editmode_toggle_button').addEventListener('click', () => {toggle_edit_mode()})
+
+function unloadPage(){ 
+    if(edit_mode){
+        return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
+    }
+}
+window.onbeforeunload = unloadPage;
