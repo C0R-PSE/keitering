@@ -1,3 +1,36 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD7QrnoeqL3Mem0kqxRtWqSUEcAb3Lip0Y",
+  authDomain: "myapp-bb443.firebaseapp.com",
+  projectId: "myapp-bb443",
+  storageBucket: "myapp-bb443.firebasestorage.app",
+  messagingSenderId: "248205536207",
+  appId: "1:248205536207:web:07a6b515eaae327e5540ba",
+  measurementId: "G-E21PST2VB0"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app, 'https://myapp-bb443-default-rtdb.europe-west1.firebasedatabase.app')
+const reference = ref(db)
+const data = await get(child(reference, 'data')).then((snapshot) => {
+    if (snapshot.exists()) {
+      return(snapshot.val())
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+//set(ref(db, 'data'), data)
+
 const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
 
 const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
@@ -20,14 +53,6 @@ const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
-
-const data = await fetch('https://keitering.d-b-17f.workers.dev/', {
-    method:"POST",
-    body:JSON.stringify({
-        query:"get_data"
-    })
-}).then(resp => resp.json())
-console.log(data)
 
 const admin_rights = true
 
