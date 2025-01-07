@@ -22,6 +22,7 @@
     padding: 5px 10px;
     height:50px;
     border-bottom: 2px solid #ccc;
+    gap: 20px;
 }
 .top_bar > .menu_button_top {
     cursor: pointer;
@@ -32,6 +33,39 @@
     background-position: 0 5px;
     margin-right: 20px;
 }
+.top_bar > .editmode_toggle_button {
+    display: none;
+}
+body.admin_rights .editmode_toggle_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    aspect-ratio: 1;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+.top_bar > .editmode_toggle_button svg {
+    &.edit {
+        display: block;
+        width: 20px;
+        height: 100%;
+    }
+    &.done {
+        display: none;
+    }
+}
+body.edit_mode .editmode_toggle_button svg {
+    &.edit {
+        display: none;
+    }
+    &.done {
+        display: block;
+        width: 32px;
+        height: 28px;
+    }
+}
+
 .menu_top {
     bottom: calc(100% - 50px);
     transition: all .3s;
@@ -197,9 +231,9 @@
 }
 .hookah_card > .card_footer > .label {
     padding: 5px;
-}
-.hookah_card > .card_footer:hover {
-    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 .hookah_card > .card_footer > svg {
     content: '';
@@ -250,27 +284,27 @@
     height: 800px;
     background-color: white;
 }
-
-
-[contenteditable] {
-    cursor: auto;
-    outline: none;
-    display: flex;
-    flex-direction: row;
-    &::after {
-        content: '';
-        display: block;
-        background-image: url(./pencil.svg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        aspect-ratio: 1;
-        width: 10px;
-        margin-left: 5px;
-        padding-bottom: 5px;
-        background-clip: content-box;
-    }
-}
 @keyframes slideIn {
     0% {bottom: -20%}
     100% {bottom: 0}
 }
+
+svg.edit_pencil {
+    display: none;
+}
+body.edit_mode svg.edit_pencil {
+    display: block;
+}
+body.edit_mode [contenteditable] {
+    cursor: text;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none !important;
+    & svg.edit_pencil {
+        width: 10px;
+        height: 10px;
+        margin-left: 3px;
+    }
+}
+

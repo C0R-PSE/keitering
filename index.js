@@ -19,8 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app, 'https://myapp-bb443-default-rtdb.europe-west1.firebasedatabase.app')
-const reference = ref(db)
-const data = await get(child(reference, 'data')).then((snapshot) => {
+const data = await get(child(ref(db), 'data')).then((snapshot) => {
     if (snapshot.exists()) {
       return(snapshot.val())
     } else {
@@ -55,6 +54,10 @@ const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
 
 const admin_rights = true
+var edit_mode = false
+if (admin_rights) {
+    document.querySelector('body').classList.add('admin_rights')
+}
 
 function toggle_menu() {
     menu.classList.toggle('active')
@@ -109,14 +112,17 @@ for (var i in data.hookahs) {
     label.classList.add('label')
     label.innerText = data.hookahs[i].name
     card_footer.append(label)
+    const pencil_icon_buffer = document.createElement('div')
+    pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="./pencil.svg#Capa_1"></use></svg>'
+    label.append(pencil_icon_buffer.querySelector('svg'))
     if (admin_rights) {
-        label.setAttribute('contenteditable', '')
+        label.setAttribute('contenteditable', false)
     }
     const info_icon_buffer = document.createElement('div')
-    info_icon_buffer.innerHTML = '<svg viewBox="0 0 100 100"><use xlink:href="./icon.svg#info_icon"></use></svg>'
+    info_icon_buffer.innerHTML = '<svg class="info_icon" viewBox="0 0 100 100"><use xlink:href="./icon.svg#info_icon"></use></svg>'
     card_footer.append(info_icon_buffer.querySelector('svg'))
     hookah_card.addEventListener('click', (e) => {
-        if (!e.target.hasAttribute('contenteditable')) {
+        if (e.target.closest('[contenteditable="true"]') == null) {
             show_info(e.target.closest('.hookah_card'))
         }
     })
@@ -129,13 +135,16 @@ for (var i in data.navbar) {
     label.classList.add('label')
     label.innerText = data.navbar[i].name
     tab.appendChild(label)
+    const pencil_icon_buffer = document.createElement('div')
+    pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="./pencil.svg#Capa_1"></use></svg>'
+    label.append(pencil_icon_buffer.querySelector('svg'))
     tab.addEventListener('click', (e) => {
-        if (!e.target.hasAttribute('contenteditable')) {
+        if (e.target.closest('[contenteditable="true"]') == null) {
             open_tab(e.target.closest('.navigation > div').getAttribute('tag'))
         }
     })
     if (admin_rights) {
-        label.setAttribute('contenteditable', '')
+        label.setAttribute('contenteditable', false)
     }
     navigation.appendChild(tab)
 }
@@ -155,3 +164,21 @@ window.addEventListener('resize', () => {checkGridWidth()})
 info_sheet.addEventListener('click', (e) => {
     if (e.target==info_sheet) {info_sheet.classList.remove('active')}
 })
+
+var editable_elements = [...document.querySelectorAll('[contenteditable]')]
+function toggle_edit_mode() {
+    if (edit_mode == false) { // enter edit mode
+        for (var i in editable_elements) {
+            editable_elements[i].setAttribute('contenteditable', 'true')
+        }
+        edit_mode = true
+        document.querySelector('body').classList.add('edit_mode')
+    } else { // exit edit mode; save changes
+        for (var i in editable_elements) {
+            editable_elements[i].setAttribute('contenteditable', 'false')
+        }
+        edit_mode = false
+        document.querySelector('body').classList.remove('edit_mode')
+    }
+}
+document.querySelector('.editmode_toggle_button').addEventListener('click', () => {toggle_edit_mode()})
