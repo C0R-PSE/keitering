@@ -316,6 +316,7 @@ body.edit_mode [contenteditable] {
 }
 
 .tobacco_card {
+    font-size: 18px;
     position: relative;
     user-select: none;
     overflow: hidden;
