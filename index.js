@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+//import { JSColor } from "./jscolor.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,7 +20,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app, 'https://myapp-bb443-default-rtdb.europe-west1.firebasedatabase.app')
-const data = await get(child(ref(db), 'data')).then((snapshot) => {
+var data
+var data1
+data1 = await get(child(ref(db), 'data')).then((snapshot) => {
     if (snapshot.exists()) {
       return(snapshot.val())
     } else {
@@ -29,7 +32,74 @@ const data = await get(child(ref(db), 'data')).then((snapshot) => {
     console.error(error);
   });
 //set(ref(db, 'data'), data)
+data = {
+    "hookahs": [
+      {
+        "description": "Описание punk li",
+        "name": "punk li"
+      },
+      {
+        "description": "Описание seven star",
+        "name": "seven star"
+      },
+      {
+        "description": "Описание soft smoke",
+        "name": "soft smoke"
+      }
+    ],
+    "navbar": [
+      {
+        "name": "Наши кальяны",
+        "tag": "hookahs"
+      },
+      {
+        "name": "Табаки",
+        "tag": "tobacco"
+      },
+      {
+        "name": "Услуги и тарифы",
+        "tag": "prices"
+      },
+      {
+        "name": "Инструкции",
+        "tag": "instructions"
+      }
+    ],
+    "tobacco": [
+        {
+            "name": "name1",
+            "flavour": "яблоко",
+            "color": "green",
+            "in_stock": true
+        },
+        {
+            "name": "name2",
+            "flavour": "яблоко",
+            "color": "green",
+            "in_stock": true
+        },
+        {
+            "name": "name3",
+            "flavour": "яблоко",
+            "color": "green",
+            "in_stock": true
+        },
+        {
+            "name": "name4",
+            "flavour": "яблоко",
+            "color": "green",
+            "in_stock": true
+        },
+        {
+            "name": "name5",
+            "flavour": "яблоко",
+            "color": "green",
+            "in_stock": true
+        }
+    ]
+}
 
+console.log("data loaded")
 const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
 
 const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
@@ -52,6 +122,7 @@ const hookahs = content_grid.querySelector('.hookahs')
 const info_sheet = document.querySelector('.info_sheet')
 const navigation = content_grid.querySelector('.navigation')
 const instructions = content_grid.querySelector('.instructions')
+const tobacco_grid = content_grid.querySelector('.tobacco')
 
 const admin_rights = true
 var edit_mode = false
@@ -157,6 +228,22 @@ for (var i in [...instructions.children]) {
 open_tab('hookahs')
 checkGridWidth()
 
+for (var i in data.tobacco) {
+    const tobacco_card = document.createElement('div')
+    tobacco_card.classList.add('tobacco_card')
+    tobacco_card.style.backgroundColor = data.tobacco[i].color
+    tobacco_card.setAttribute('name', data.tobacco[i].name)
+    if (data.tobacco[i].in_stock) {
+        tobacco_card.classList.add('in_stock')
+    }
+    const color_circle = document.createElement('span')
+    color_circle.classList.add('color_circle')
+    const myPicker = new JSColor(color_circle, {format:'hex', onInput: () => {
+        color_circle.closest('.tobacco_card').style.backgroundColor = myPicker.toRGBAString()
+    }})
+    tobacco_card.append(color_circle)
+    tobacco_grid.append(tobacco_card)
+}
 
 
 
@@ -188,3 +275,7 @@ function unloadPage(){
     }
 }
 window.onbeforeunload = unloadPage;
+
+const test = document.createElement('span')
+test.setAttribute('data-jscolor', '')
+document.querySelector('body').append(test)

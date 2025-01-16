@@ -158,6 +158,13 @@ body.edit_mode .editmode_toggle_button svg {
         align-items: center;
         justify-items: center;
     }
+    &.tobacco {
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(auto-fit, 200px);
+        align-items: center;
+        justify-items: center;
+    }
 }
 .instruction {
     font-family: sans-serif;
@@ -308,3 +315,29 @@ body.edit_mode [contenteditable] {
     }
 }
 
+.tobacco_card {
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    border: 2px solid;
+    display: flex;
+    border-radius: 20px;
+    height:200px;
+    width:200px;
+    flex-direction: column;
+    transition: transform .1s;
+}
+.color_circle {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    border: 2px solid;
+}
+body.edit_mode .color_circle {
+    display: block;
+}

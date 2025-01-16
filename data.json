@@ -1,30 +1,66 @@
 {
-    "navbar":[
-        {
-            "name" : "Наши кальяны",
-            "tag" : "hookahs"
-        },
-        {
-            "name" : "Услуги и тарифы",
-            "tag" : "prices"
-        },
-        {
-            "name" : "Инструкции",
-            "tag" : "instructions"
-        }
+    "hookahs": [
+      {
+        "description": "Описание punk li",
+        "name": "punk li"
+      },
+      {
+        "description": "Описание seven star",
+        "name": "seven star"
+      },
+      {
+        "description": "Описание soft smoke",
+        "name": "soft smoke"
+      }
     ],
-    "hookahs":[
+    "navbar": [
+      {
+        "name": "Наши кальяны",
+        "tag": "hookahs"
+      },
+      {
+        "name": "Услуги и тарифы",
+        "tag": "prices"
+      },
+      {
+        "name": "Инструкции",
+        "tag": "instructions"
+      },
+      {
+        "name": "Табаки",
+        "tag": "tobacco"
+      }
+    ],
+    "tobacco": [
         {
-            "name":"punk li",
-            "description":"Описание punk li"
+            "name": "name1",
+            "flavour": "яблоко",
+            "color": "green",
+            "in stock": true
         },
         {
-            "name":"seven star",
-            "description":"Описание seven star"
+            "name": "name2",
+            "flavour": "яблоко",
+            "color": "green",
+            "in stock": true
         },
         {
-            "name":"soft smoke",
-            "description":"Описание soft smoke"
+            "name": "name3",
+            "flavour": "яблоко",
+            "color": "green",
+            "in stock": true
+        },
+        {
+            "name": "name4",
+            "flavour": "яблоко",
+            "color": "green",
+            "in stock": true
+        },
+        {
+            "name": "name5",
+            "flavour": "яблоко",
+            "color": "green",
+            "in stock": true
         }
     ]
-}
+  }
