@@ -69,31 +69,31 @@ data = {
         {
             "name": "name1",
             "flavour": "яблоко",
-            "color": "green",
+            "color": "#000000",
             "in_stock": true
         },
         {
             "name": "name2",
             "flavour": "яблоко",
-            "color": "green",
+            "color": "#ffffff",
             "in_stock": true
         },
         {
             "name": "name3",
             "flavour": "яблоко",
-            "color": "green",
+            "color": "#e7e7e7",
             "in_stock": true
         },
         {
             "name": "name4",
             "flavour": "яблоко",
-            "color": "green",
+            "color": "#f00",
             "in_stock": true
         },
         {
             "name": "name5",
             "flavour": "яблоко",
-            "color": "green",
+            "color": "ff0",
             "in_stock": true
         }
     ]
@@ -231,15 +231,16 @@ checkGridWidth()
 for (var i in data.tobacco) {
     const tobacco_card = document.createElement('div')
     tobacco_card.classList.add('tobacco_card')
-    tobacco_card.style.backgroundColor = data.tobacco[i].color
+    tobacco_card.style.color = data.tobacco[i].color
     tobacco_card.setAttribute('name', data.tobacco[i].name)
     if (data.tobacco[i].in_stock) {
         tobacco_card.classList.add('in_stock')
     }
+    tobacco_card.innerText = data.tobacco[i].name
     const color_circle = document.createElement('span')
     color_circle.classList.add('color_circle')
-    const myPicker = new JSColor(color_circle, {format:'hex', onInput: () => {
-        color_circle.closest('.tobacco_card').style.backgroundColor = myPicker.toRGBAString()
+    const myPicker = new JSColor(color_circle, {format:"hex", value:data.tobacco[i].color, width:360, height:200, onInput: () => {
+        color_circle.closest('.tobacco_card').style.color = myPicker.toRGBAString()
     }})
     tobacco_card.append(color_circle)
     tobacco_grid.append(tobacco_card)
@@ -275,7 +276,3 @@ function unloadPage(){
     }
 }
 window.onbeforeunload = unloadPage;
-
-const test = document.createElement('span')
-test.setAttribute('data-jscolor', '')
-document.querySelector('body').append(test)

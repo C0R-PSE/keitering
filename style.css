@@ -319,13 +319,15 @@ body.edit_mode [contenteditable] {
     position: relative;
     user-select: none;
     overflow: hidden;
-    border: 2px solid;
+    border: 2px solid black;
     display: flex;
     border-radius: 20px;
     height:200px;
     width:200px;
     flex-direction: column;
     transition: transform .1s;
+    align-items: center;
+    justify-content: center;
 }
 .color_circle {
     display: none;
@@ -336,7 +338,7 @@ body.edit_mode [contenteditable] {
     height: 25px;
     width: 25px;
     border-radius: 25px;
-    border: 2px solid;
+    border: 2px solid black;
 }
 body.edit_mode .color_circle {
     display: block;
