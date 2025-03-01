@@ -1,5 +1,5 @@
 //import { JSColor } from "./jscolor.js"
-import { data } from "./db.js"
+import { data } from "../db.js"
 const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
 
 const hookahs_images_data = await fetch('https://api.github.com/repos/C0R-PSE/keitering/contents/images/hookahs', {
@@ -93,13 +93,13 @@ class Hookah_Card {
         card_footer.append(label)
 
         const pencil_icon_buffer = document.createElement('div')
-        pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="./pencil.svg#Capa_1"></use></svg>'
+        pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="../pencil.svg#Capa_1"></use></svg>'
         label.append(pencil_icon_buffer.querySelector('svg'))
         if (admin_rights) {
             label.setAttribute('contenteditable', false)
         }
         const info_icon_buffer = document.createElement('div')
-        info_icon_buffer.innerHTML = '<svg class="info_icon" viewBox="0 0 100 100"><use xlink:href="./icon.svg#info_icon"></use></svg>'
+        info_icon_buffer.innerHTML = '<svg class="info_icon" viewBox="0 0 100 100"><use xlink:href="../icon.svg#info_icon"></use></svg>'
         card_footer.append(info_icon_buffer.querySelector('svg'))
         
         return hookah_card
@@ -108,7 +108,7 @@ class Hookah_Card {
 
 for (var i in data.hookahs) {
     var img_src = ''
-    if (typeof(hookahs_images[data.hookahs[i].name]) != "undefined") { img_src = "./images/hookahs/" + data.hookahs[i].name + "/" + hookahs_images[data.hookahs[i].name][0] }
+    if (typeof(hookahs_images[data.hookahs[i].name]) != "undefined") { img_src = "../images/hookahs/" + data.hookahs[i].name + "/" + hookahs_images[data.hookahs[i].name][0] }
     const hookah_card = new Hookah_Card(i, img_src, data.hookahs[i].name).assemble()
     hookahs.append(hookah_card)
     hookah_card.addEventListener('click', (e) => {
@@ -126,7 +126,7 @@ for (var i in data.navbar) {
     label.innerText = data.navbar[i].name
     tab.appendChild(label)
     const pencil_icon_buffer = document.createElement('div')
-    pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="./pencil.svg#Capa_1"></use></svg>'
+    pencil_icon_buffer.innerHTML = '<svg class="edit_pencil" viewBox="0 0 100 100"><use xlink:href="../pencil.svg#Capa_1"></use></svg>'
     label.append(pencil_icon_buffer.querySelector('svg'))
     tab.addEventListener('click', (e) => {
         if (e.target.closest('[contenteditable="true"]') == null) {
