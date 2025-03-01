@@ -189,11 +189,11 @@ function toggle_edit_mode() {
 }
 document.querySelector('.editmode_toggle_button').addEventListener('click', () => {toggle_edit_mode()})
 
-function unloadPage(){ 
+function editWarning(){ 
     if(edit_mode){
         return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
     }
 }
-window.onbeforeunload = unloadPage;
+window.onbeforeunload = editWarning;
 
 
