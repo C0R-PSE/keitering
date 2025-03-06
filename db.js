@@ -25,15 +25,21 @@ data = {
     "hookahs": [
         {
           "description": "Описание punk li",
-          "name": "punk li"
+          "name": "punk li",
+          "photos": ["../images/hookahs/punk li/photo_2024-08-25_17-38-45.jpg"],
+          "preview": 0
         },
         {
           "description": "Описание seven star",
-          "name": "seven star"
+          "name": "seven star",
+          "photos": ["../images/hookahs/seven star/photo_2024-08-25_17-38-43.jpg"],
+          "preview": 0
         },
         {
           "description": "Описание soft smoke",
-          "name": "soft smoke"
+          "name": "soft smoke",
+          "photos": [],
+          "preview": 0
         }
     ],
     "navbar": [
@@ -87,8 +93,8 @@ data = {
         }
     ]
 }
-var data1
-data = await get(child(ref(db), 'data')).then((snapshot) => {
+var DBdata
+DBdata = await get(child(ref(db), 'data')).then((snapshot) => {
     if (snapshot.exists()) {
       return(snapshot.val())
     } else {
@@ -100,4 +106,5 @@ data = await get(child(ref(db), 'data')).then((snapshot) => {
 set(ref(db, 'data'), data)
 
   console.log("data loaded")
-export {data, data1}
+export {data, DBdata}
+
