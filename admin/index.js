@@ -1,5 +1,76 @@
-import { data } from "../db.js"
-
+//import { data } from "../db.js"
+var data = {
+    "hookahs": [
+        {
+          "description": "Описание punk li",
+          "name": "punk li",
+          "photos": ["../images/hookahs/punk li/photo_2024-08-25_17-38-45.jpg"],
+          "preview": 0
+        },
+        {
+          "description": "Описание seven star",
+          "name": "seven star",
+          "photos": ["../images/hookahs/seven star/photo_2024-08-25_17-38-43.jpg"],
+          "preview": 0
+        },
+        {
+          "description": "Описание soft smoke",
+          "name": "soft smoke",
+          "photos": [],
+          "preview": 0
+        }
+    ],
+    "navbar": [
+        {
+          "name": "Наши кальяны",
+          "tag": "hookahs"
+        },
+        {
+          "name": "Табаки",
+          "tag": "tobacco"
+        },
+        {
+          "name": "Услуги и тарифы",
+          "tag": "prices"
+        },
+        {
+          "name": "Инструкции",
+          "tag": "instructions"
+        }
+    ],
+    "tobacco": [
+        {
+            "name": "name1",
+            "flavour": "яблоко",
+            "color": "#000000",
+            "in_stock": true
+        },
+        {
+            "name": "name2",
+            "flavour": "яблоко",
+            "color": "#ffffff",
+            "in_stock": true
+        },
+        {
+            "name": "name3",
+            "flavour": "яблоко",
+            "color": "#e7e7e7",
+            "in_stock": true
+        },
+        {
+            "name": "name4",
+            "flavour": "яблоко",
+            "color": "#f00",
+            "in_stock": true
+        },
+        {
+            "name": "name5",
+            "flavour": "яблоко",
+            "color": "ff0",
+            "in_stock": true
+        }
+    ]
+}
 const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
 const repopath = 'https://api.github.com/repos/C0R-PSE/keitering'
 
@@ -16,6 +87,7 @@ for (var i in hookahs_images_data) {
         hookahs_images[hookahs_images_data[i].name].push(hookah_query[k].name)
     }
 }
+
 const menu_button_top = document.querySelector('.menu_button_top')
 const menu = document.querySelector('.menu_top')
 const content_grid = document.querySelector('.content_grid')
@@ -76,7 +148,7 @@ function show_info(content) {
             gallery.setAttribute('current_section', 0)
             gallery.setAttribute('actual_section', 0)
             gsap.registerPlugin(ScrollToPlugin)
-            console.log(sections)
+            //console.log(sections)
             function scroll_gallery(increment, gallery, sections) {
                 const current_section = Number.parseInt(gallery.getAttribute('current_section'))
                 var target_id = current_section + increment
@@ -119,17 +191,17 @@ function show_info(content) {
                 for (var i in gallery_items) {
                     var section_pos = gallery_items[i].getBoundingClientRect();
                     if (i == 0 && section_pos.left == wrapper_pos.left) {
-                        console.log('reached left edge')
+                        //console.log('reached left edge')
                         gallery.setAttribute('actual_section', i)
                         break
                     } else if (i == gallery_items.length - 1 && section_pos.right == wrapper_pos.right) {
-                        console.log('reached right edge')
+                        //console.log('reached right edge')
                         gallery.setAttribute('actual_section', i)
                         break
                     } else {
                         const current_section = Number.parseInt(gallery.getAttribute('current_section'))
                         if (section_pos.left < wrapper_center && section_pos.right > wrapper_center) {
-                            console.log('current section is ' + i)
+                            //console.log('current section is ' + i)
                             gallery.setAttribute('actual_section', i)
                         }
                     }
@@ -171,6 +243,71 @@ function buildHookahPreview(id) {
 function edit_hookah(id) {
 
 }
+class FileBrowser {
+    browser = document.createElement('div')
+    #current_path
+    #base_path
+    constructor(base_path) {
+        this.browser.classList.add('file_browser')
+        this.browser.innerHTML = '<div class="browser_panel"><div class="back button active"></div><div class="path"></div></div><div class="browser_content"></div>'
+        if (base_path == undefined) { base_path = '/images' }
+        this.#base_path = base_path
+        this.#current_path = this.#base_path
+        this.browse(this.#current_path)
+        this.browser.querySelector('.browser_panel .back').addEventListener('click', () => {this.return()})
+    }
+    async browse(path) {
+        //console.log(path)
+        this.#current_path = path
+        this.browser.querySelector('.browser_panel .path').innerText = this.#current_path
+        if (this.#current_path == this.#base_path) {this.browser.querySelector('.browser_panel .back').classList.remove('active')}
+        else {this.browser.querySelector('.browser_panel .back').classList.add('active')}
+        const browser_content = this.browser.querySelector('.browser_content')
+        const query = await fetch(repopath + '/contents' + path, {
+            headers: {"Authorization": "Bearer " + token}
+        }).then(resp => resp.json())
+        var result = []
+        for (let i in query) {
+            //console.log(query[i])
+            const new_item = document.createElement('div')
+            new_item.classList.add('browser_item')
+            const file_preview = document.createElement('img')
+            new_item.appendChild(file_preview)
+            if (query[i].type == 'dir') {
+                new_item.classList.add('folder')
+                new_item.addEventListener('click', () => {this.browse(this.#current_path + '/' + query[i].name)})
+                file_preview.src = '../website_media/icons/Folder_Icon.png'
+            } else if (query[i].type == 'file') {
+                new_item.classList.add('file')
+                new_item.addEventListener('click', () => {window.open(query[i].html_url)})
+                file_preview.src = '../' + this.#current_path + '/' + query[i].name
+            }
+            const label = document.createElement('div')
+            label.classList.add('label')
+            label.innerText = query[i].name
+            new_item.appendChild(label)
+            result.push(new_item)
+        }
+        browser_content.replaceChildren()
+        for (let i in result) {
+            browser_content.appendChild(result[i])
+        }
+    }
+    async return() {
+        if (this.#current_path != this.#base_path) {
+            const current_path_split = this.#current_path.split('/')
+            const new_path = this.#current_path.replace('/' + current_path_split[current_path_split.length - 1], '')
+            await this.browse(new_path)
+        }
+    }
+}
+document.querySelector('.browse_button').addEventListener('click', () => {
+    const preview = document.createElement('div')
+    preview.classList.add('info_box')
+    preview.appendChild(new FileBrowser().browser)
+    show_info(preview)
+})
+
 
 // начало генерации сайта
 
@@ -179,63 +316,21 @@ window.addEventListener('scroll', () => {hide_menu()})
 
 class Hookah_Card {
     #id
-    #img_src
-    #name
-    constructor(id, img_src, name) {
+    hookah_card = document.createElement('div')
+    constructor(id) {
         this.#id = id
-        this.#img_src = img_src
-        this.#name = name
-    }
-    addImage(hookah_card) {
-        const card_image = document.createElement('img')
-        card_image.classList.add("card_image")
-        card_image.src = this.#img_src
-        hookah_card.appendChild(card_image)
-    }
-    addFooter(hookah_card) {
-        const card_footer = document.createElement('div')
-        card_footer.classList.add("card_footer")
-        hookah_card.appendChild(card_footer)
-
-        const label = document.createElement('div')
-        label.classList.add('label')
-        label.innerText = this.#name
-        card_footer.append(label)
-
-        const info_icon_buffer = document.createElement('div')
-        info_icon_buffer.innerHTML = '<svg class="info_icon" viewBox="0 0 100 100"><use xlink:href="../icon.svg#info_icon"></use></svg>'
-        card_footer.append(info_icon_buffer.querySelector('svg'))
-    }
-    addAdminButtons(hookah_card) {
-        const buttons_sheet = document.createElement('div')
-        buttons_sheet.classList.add('buttons_sheet')
-        const view_button = document.createElement('div')
-        view_button.classList.add('view_button')
-        const edit_button = document.createElement('div')
-        edit_button.classList.add('edit_button')
-        buttons_sheet.append(view_button)
-        buttons_sheet.append(edit_button)
-        view_button.addEventListener('click', (e) => {show_info(buildHookahPreview(this.#id))})
-        edit_button.addEventListener('click', (e) => {edit_hookah(this.#id)})
-        hookah_card.appendChild(buttons_sheet)
-    }
-    assemble() {
-        var hookah_card = document.createElement('div')
-        hookah_card.classList.add('hookah_card')
-        hookah_card.setAttribute('hookahId', this.#id)
-
-        this.addAdminButtons(hookah_card)
-        this.addImage(hookah_card)
-        this.addFooter(hookah_card)
-
-        return hookah_card
+        this.hookah_card.classList.add('hookah_card')
+        this.hookah_card.innerHTML = '<div class="buttons_sheet"><div class="view_button"></div><div class="edit_button"></div></div><img class="card_image"><div class="card_footer"><div class="label"></div><svg class="info_icon" viewBox="0 0 100 100"><use xlink:href="../website_media/icons/icon.svg#info_icon"></use></svg></div>'
+        if (data.hookahs[this.#id].photos.length > 0) { this.hookah_card.querySelector('img.card_image').src = data.hookahs[i].photos[0] }
+        this.hookah_card.querySelector('.label').innerText = data.hookahs[i].name
+        this.hookah_card.querySelector('.view_button').addEventListener('click', (e) => {show_info(buildHookahPreview(this.#id))})
+        this.hookah_card.querySelector('.edit_button').addEventListener('click', (e) => {edit_hookah(this.#id)})
     }
 }
 
 for (var i in data.hookahs) {
     var img_src = ''
-    if (typeof(hookahs_images[data.hookahs[i].name]) != "undefined") { img_src = "../images/hookahs/" + data.hookahs[i].name + "/" + hookahs_images[data.hookahs[i].name][0] }
-    const hookah_card = new Hookah_Card(i, img_src, data.hookahs[i].name).assemble()
+    const hookah_card = new Hookah_Card(i).hookah_card
     hookahs.append(hookah_card)
 }
 
