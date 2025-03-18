@@ -1,7 +1,7 @@
 {
   "name": "keitering",
   "version": "0.1.0",
-  "homepage":"c0r-pse.github.io/keitering",
+  "homepage":"https://c0r-pse.github.io/keitering",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
