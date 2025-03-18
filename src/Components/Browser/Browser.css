@@ -1,0 +1,75 @@
+.file_browser  {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0 0;
+    & .browser_panel {
+        display: flex;
+        align-items: center;
+        padding: 5px 15px;
+        border-bottom: 2px solid;
+        & .button {
+            &.back {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 25px;
+                height: 25px;
+                &::after {
+                    border: solid #7e7e7e;
+                    border-width: 0 2px 2px 0;
+                    display: inline-block;
+                    padding: 3px;
+                    transform: rotate(135deg);
+                    -webkit-transform: rotate(135deg);
+                    content: ''
+                }
+                &.active {
+                    cursor: pointer;
+                    &::after {
+                        border-color: black;
+                    }
+                }
+            }
+            &:not(.back) {
+                width: 25px;
+                height: 25px;
+                background-color: black;
+                &.active {
+                    background-color: #7e7e7e;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    & .browser_content {
+        display: flex;
+        padding: 15px;
+        overflow-y: auto;
+        & .browser_item {
+            margin: 5px;
+            width: 300px;
+            height: 275px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            cursor: pointer;
+            border-radius: 10px;
+            &:hover {
+                box-shadow: 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.15);
+            }
+            & img {
+                max-height: 200px;
+                max-width: 250px;
+            }
+            & .label {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                height: 50px;
+                padding: 15 10;
+            }
+        }
+    }
+}

@@ -1,0 +1,79 @@
+.hookah_card {
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    border: 2px solid;
+    display: flex;
+    border-radius: 20px;
+    height:400px;
+    width:250px;
+    background-color: #7e7e7e;
+    flex-direction: column;
+    transition: transform .1s;
+}
+.hookah_card > .buttons_sheet {
+    z-index: 100;
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 10px 0;
+}
+.hookah_card > .buttons_sheet > .view_button {
+    width: 25px;
+    aspect-ratio: 1;
+    background-color: #f00;
+    cursor: pointer;
+}
+.hookah_card > .buttons_sheet > .edit_button {
+    width: 25px;
+    aspect-ratio: 1;
+    background-color: #f00;
+    cursor: pointer;
+}
+
+.hookah_card > .card_image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+.hookah_card img:not([src]) {
+    visibility: hidden;
+}
+.hookah_card > .card_footer {
+    z-index: 300;
+    position: absolute;
+    bottom: 0;
+    min-height: 50px;
+    width: 100%;
+    color: #fff;
+    font-family: math;
+    text-transform: uppercase;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hookah_card > .card_footer > .label {
+    padding: 5px;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.hookah_card > .card_footer > svg {
+    content: '';
+    display: block;
+    width: 25px;
+    aspect-ratio: 1;
+}
+.hookah_card::after { /* блюр */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    min-height: 50px;
+    width: 100%;
+    background-color: #00000060;
+    backdrop-filter: blur(5px);
+}
