@@ -1,7 +1,12 @@
 import './App.css';
 import Browser from './Components/Browser/Browser'
+import {dataLocal} from './db'
+import { useEffect, useState } from 'react'
+import Gallery from './Components/Gallery/Gallery';
 
-/*function App() {
+//console.log(dataLocal)
+
+/*function App() { // Главная страница
   return (
     
     <div className='App'>
@@ -33,15 +38,17 @@ import Browser from './Components/Browser/Browser'
   );
 }*/
 
-const files = [
-  {name: '1', type: 'dir'},
-  {name: '2', type: 'dir'},
-  {name: '3', type: 'dir'},
-  {name: '4', type: 'dir'},
-  {name: '5', type: 'dir'}
-]
 function App() {
-  return <Browser files={files} />
+  return (
+    <div className='info_sheet active'>
+      <div className='info_box'>
+        <div className='wrapper'>
+          <Gallery />
+        </div>
+        <div className='footer'></div>
+      </div>
+    </div>
+  )
 }
 
 export default App;

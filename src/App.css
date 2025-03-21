@@ -231,31 +231,9 @@ body.edit_mode .editmode_toggle_button svg {
     height: 800px;
     background-color: white;
     overflow: hidden;
-    padding: 10 10 0;
+    padding: 10px 10px 0;
 }
-.info_box .gallery {
-    display:flex;
-    flex-wrap:nowrap;
-    gap: 10px;
-    height: calc(100% - 50px);
-    overflow-x: scroll;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-.info_box .wrapper {
-    overflow-x:hidden;
-    border-radius: 20px;
-}
-.info_box > .footer {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    height: 50px;
-    padding: 0 0 0 25px;
-    text-transform: capitalize;
-    align-items: center;
-}
+
 @keyframes slideUp {
     0% {bottom: -20%}
     100% {bottom: 0}
