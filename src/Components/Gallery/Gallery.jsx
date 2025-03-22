@@ -8,40 +8,66 @@ import { ScrollToPlugin } from 'gsap/all';
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollToPlugin)
 
-function Gallery() {
+function Gallery(withSections) {
     const [currentSection, updateSection] = useState(0)
     function scroll_gallery(e) {
-        console.log(e.deltaY)
         const gallery = e.target.closest('.gallery')
-        const sections = [...gallery.children]
+        const images = [...gallery.children]
         var inc = 1*(e.deltaY > 0) - 1*(e.deltaY < 1)
-        var offset = 0
-        const wrapperWidth = gallery.closest('.wrapper').clientWidth
-        const next_section = currentSection + inc
-        if (next_section >= 0 && next_section <= sections.length - 1) {
-            updateSection(next_section)
+        const wrapper = gallery.closest('.wrapper')
+        const sections = [...wrapper.querySelector('.sections').children]
+        var nextSection = currentSection + inc
+        if (nextSection >= 0 && nextSection < images.length - 2) {
+            var offset = 0
+            var scrollTarget = images[nextSection] // first section
+            if (nextSection == images.length - 3) { // last section
+                scrollTarget = images[nextSection + 2]
+            } else if (nextSection > 0) { // middle sections
+                scrollTarget = images[nextSection + 1]
+                offset = wrapper.clientWidth / 2 - images[nextSection + 1].clientWidth / 2
+            } 
+
+            // scrolling
+            if (withSections) {
+                sections[currentSection].classList.remove('active')
+                sections[nextSection].classList.add('active')
+            }
+            updateSection(nextSection)
             gsap.to(".gallery", {
                 duration: 1,
-                scrollTo: {x: "#section_" + next_section, offsetX: offset}
+                scrollTo: {x: scrollTarget, offsetX: offset}
             })
         }
     }
 
     let result = []
+    let progressBarSections = []
+    let sectionsElem = ''
     const hookah_data = dataLocal.hookahs[0]
     for (var i in hookah_data.photos) {
-        for (var k = 0; k < 10; k++) {
+        for (var k = 0; k <= 6; k++) {
             result.push(
-                <img key={k} id={"section_" + k} 
+                <img key={k} 
                 className='preview_hookah_image' 
                 src={process.env.PUBLIC_URL + '/' + hookah_data.photos[i]} />
             )
+            if (k > 0 && k < 6) {
+                progressBarSections.push(
+                    <div key={k} className={'section' + ' active'.repeat(k == 1)}></div>
+                )
+            }
         }
+    }
+    if (withSections) {
+        sectionsElem = <div className='sections'>{progressBarSections}</div>
     }
 
     return(
-        <div onWheel={(e) => scroll_gallery(e)} className="gallery">
-            {result}
+        <div className='wrapper'>
+            <div onWheel={(e) => scroll_gallery(e)} className="gallery">
+                {result}
+            </div>
+            {sectionsElem}
         </div>
     )
 }

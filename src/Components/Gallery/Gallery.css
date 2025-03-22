@@ -2,16 +2,18 @@
     height: 100%;
     display:flex;
     flex-wrap:nowrap;
-    /*gap: 10px;*/
+    gap: 10px;
     overflow-x: scroll;
     &::-webkit-scrollbar {
         display: none;
     }
 }
 .info_box .wrapper {
-    overflow-x:hidden;
+    display: flex;
+    overflow-x: hidden;
     border-radius: 20px;
     height: calc(100% - 50px);
+    flex-direction: column;
 }
 .info_box > .footer {
     position: absolute;
@@ -25,4 +27,32 @@
 
 .gallery > img {
     height: 100%;
+}
+.wrapper > .sections {
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, clamp(0px, 10%, 125px));
+    gap: 5px;
+    min-height: 20px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    width: 100%;
+    & .section {
+        position: relative;
+        height: 4px;
+        width: 100%;
+        background-color: rgb(66, 66, 66);
+        transition: 
+            background-color .1s,
+            width .1s,
+            height .1s;
+        &.active {
+            z-index: 1010;
+            height: 6px;
+            background-color: #662d91;
+            width: 150%;
+            outline: 5px solid white;
+        }
+    }
 }

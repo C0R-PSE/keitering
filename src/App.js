@@ -6,7 +6,7 @@ import Gallery from './Components/Gallery/Gallery';
 
 //console.log(dataLocal)
 
-/*function App() { // Главная страница
+function App() { // Главная страница
   return (
     
     <div className='App'>
@@ -36,19 +36,17 @@ import Gallery from './Components/Gallery/Gallery';
       </div>
     </div>
   );
-}*/
+}
 
-function App() {
+/*function App() {
   return (
     <div className='info_sheet active'>
       <div className='info_box'>
-        <div className='wrapper'>
-          <Gallery />
-        </div>
+        <Gallery withSections={true}/>
         <div className='footer'></div>
       </div>
     </div>
   )
-}
+}*/
 
 export default App;
