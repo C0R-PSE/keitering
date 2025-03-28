@@ -51,7 +51,7 @@ function Browser({path}) {
           const split_path = current_path.split('/')
           updatePath(current_path.replace('/' + split_path[split_path.length - 1], ''))}}>
         </div>
-        <div className="path">{'/' + current_path}</div>
+        <div className="path">{current_path + '/'}</div>
       </div>
       <div className="browser_content">
         {result}
