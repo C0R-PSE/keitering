@@ -9,7 +9,12 @@
     width:250px;
     background-color: #7e7e7e;
     flex-direction: column;
+    align-items: center;
     transition: transform .1s;
+}
+.hookah_card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
 .hookah_card > .buttons_sheet {
     z-index: 100;
@@ -37,7 +42,6 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: 100%;
 }
 .hookah_card img:not([src]) {
     visibility: hidden;
@@ -55,12 +59,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.hookah_card > .card_footer > .label {
-    padding: 5px;
     &:hover {
         text-decoration: underline;
     }
+}
+.hookah_card > .card_footer > .label {
+    padding: 5px;
 }
 .hookah_card > .card_footer > svg {
     content: '';

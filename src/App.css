@@ -79,23 +79,21 @@ body.edit_mode .editmode_toggle_button svg {
     border-left: 2px solid #ccc;
 }
 
-.content_wrapper {
-    padding: 100px 50px;
-    position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
 .content_grid {
-    width: min(100%, 1500px);
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px auto;
     gap: 75px;
+    width: min(100%, 1275px);
+    justify-self: center;
+    height: calc(100vh - 50px);
+    padding: 100px 50px;
+    overflow-y: auto;
 }
 .navigation {
     min-width: 250px;
     display: flex;
     position: sticky;
-    top: 150px;
+    top: 0;
     gap: 15px;
     flex-direction: column;
     align-items: center;
@@ -110,7 +108,7 @@ body.edit_mode .editmode_toggle_button svg {
     width: 100%;
     background-image: linear-gradient(#00000010 0 100%);
     background-color: #f8f8f8;
-    background-position: -250 0, 0 0;
+    background-position: -250px 0, 0 0;
     height: 50px;
     display: flex;
     align-items: center;
@@ -142,21 +140,27 @@ body.edit_mode .editmode_toggle_button svg {
 }
 .content > div.active {
     &.prices {
-        display: block;
-        border: 2px solid #7e7e7e;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        font-family: sans-serif;
     }
-    &.instructions {
+    &.instructions,
+    &.questions {
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
     &.hookahs {
-        display: grid;
-        gap: 50px;
-        grid-template-columns: repeat(auto-fit, 250px);
-        background-image: url(./media/website_media/images/grid_bg.png);
-        align-items: center;
-        justify-items: center;
+        display: block;
+        & .wrapper {
+            display: grid;
+            gap: 50px;
+            grid-template-columns: repeat(auto-fit, 250px);
+            background-image: url(./media/website_media/images/grid_bg.png);
+            align-items: center;
+            justify-items: center;
+        }
     }
     &.tobacco {
         display: grid;
@@ -166,52 +170,15 @@ body.edit_mode .editmode_toggle_button svg {
         justify-items: center;
     }
 }
-.instruction {
-    font-family: sans-serif;
-    position: relative;
-    border-radius: 10px;
-    background-color: #d8d8d8;
-    min-height: 50px;
-    display: grid;
-    &.active  > .folding_content{
-        height: calc-size(auto, size);
-    }
-}
-.instruction_header {
-    cursor: pointer;
-    padding-left: 15px;
-    display: flex;
-    width: 100%;
-    height: 50px;
-    border-radius: 10px;
-    background-color: #e7e7e7;
-    justify-content: flex-start;
-    align-items: center;
-}
-.instruction > .folding_content {
-    position: relative;
-    display: block;
-    height: 0px;
-    overflow: hidden;
-    transition: height .2s;
-}
-.instruction > .folding_content > .instruction_content {
-    padding: 15px;
-}
 
 .info_sheet {
     transition: opacity .25s;
-    padding: 50px 50px 0;
-    overflow: hidden;
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: #00000080;
     opacity: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 0;
+    z-index: -1;
     animation: slideBack .25s;
     &.active {
         z-index: 1000;
@@ -221,14 +188,25 @@ body.edit_mode .editmode_toggle_button svg {
             animation: slideUp .25s;
         }
     }
+    & > .wrapper {
+        overflow: hidden;
+        width: 100%;
+        height: 100vh;
+        padding: 50px;
+        position: sticky;
+        display: flex;
+        top: 0;
+        align-items: center;
+        justify-content: center;
+    }
 }
 .info_box {
+    position: relative;
     animation: slideDown .25s;
     border-radius: 25px;
-    position: relative;
     cursor: auto;
     width: min(100%, 1600px);
-    height: 800px;
+    height: min(100%, 800px);
     background-color: white;
     overflow: hidden;
     padding: 10px 10px 0;

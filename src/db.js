@@ -104,6 +104,7 @@ DBdata = await get(child(ref(db), 'data')).then((snapshot) => {
   });
 set(ref(db, 'data'), dataLocal)
 
+const data = dataLocal
 //console.log("data loaded")
-export { DBdata, dataLocal }
+export { DBdata, dataLocal, data }
 

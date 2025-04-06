@@ -8,7 +8,7 @@ import { ScrollToPlugin } from 'gsap/all';
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollToPlugin)
 
-function Gallery(withSections) {
+function Gallery({withSections, id}) {
     const [currentSection, updateSection] = useState(0)
     function scroll_gallery(e) {
         const gallery = e.target.closest('.gallery')
@@ -40,13 +40,13 @@ function Gallery(withSections) {
         }
     }
 
-    let result = []
+    let images = []
     let progressBarSections = []
     let sectionsElem = ''
-    const hookah_data = dataLocal.hookahs[0]
+    const hookah_data = dataLocal.hookahs[id]
     for (var i in hookah_data.photos) {
         for (var k = 0; k <= 6; k++) {
-            result.push(
+            images.push(
                 <img key={k} 
                 className='preview_hookah_image' 
                 src={process.env.PUBLIC_URL + '/' + hookah_data.photos[i]} />
@@ -65,7 +65,7 @@ function Gallery(withSections) {
     return(
         <div className='wrapper'>
             <div onWheel={(e) => scroll_gallery(e)} className="gallery">
-                {result}
+                {images}
             </div>
             {sectionsElem}
         </div>
