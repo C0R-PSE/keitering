@@ -53,8 +53,7 @@ const tariffs = {
     "кальянный мастер": {
         options: [
             { price: 2900, time: 2 },
-            { price: 6900, time: 6 },
-            { price: 12000, time: 12 }
+            { price: 6900, time: 6 }
         ]
     }
 }
