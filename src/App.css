@@ -67,8 +67,7 @@ body.edit_mode .editmode_toggle_button svg {
 }
 
 .menu_top {
-    bottom: calc(100% - 50px);
-    transition: all .3s;
+    bottom: 0;
     position: absolute;
     height: 300px;
     width: 400px;

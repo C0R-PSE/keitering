@@ -80,7 +80,7 @@ function PriceList({price_data}) {
                 : null
             var price_output = ''
             price_output += (limits.length > 0) // limit
-                ?((option == 0)
+                ?((option === 0)
                     ? 'до ' + limits[option]
                     :(option < options.length - 1)
                     ? 'от ' + limits[option - 1] + ' до ' + limits[option]
@@ -102,7 +102,7 @@ function PriceList({price_data}) {
 
             price_list.push(
               <div key={pos + '_' + option} className="price_list_row">
-                {(option == 0) 
+                {(option === 0) 
                   ? <div className='position'>{pos[0].toUpperCase() + pos.slice(1)}</div>
                   : null}
                 <div className='price'>{price_output}</div>

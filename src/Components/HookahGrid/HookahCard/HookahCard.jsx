@@ -10,7 +10,9 @@ import { useRef } from 'react'
 function HookahPreview({ id }) {
   const info_box = useRef()
   useGSAP(() => {
-    info_tl.from(info_box.current, {translateY: "20%", duration: .25}, "<")
+    info_tl.from(info_box.current, {translateY: "20%", duration: .25, onComplete: () => {
+      info_box.current.removeAttribute('style')
+    }}, "<")
     console.log('Hookah preview rendered')
     return(
       () => console.log('Hookah preview unmounted')

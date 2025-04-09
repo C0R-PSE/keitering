@@ -16,12 +16,18 @@ declare module 'react' {
 }
 
 //console.log(dataLocal)
-var info_sheet: Element
+var info_sheet: HTMLElement
 var info_sheet_wrapper: Root
 export const info_tl = gsap.timeline({
   paused: true, onReverseComplete: () => {
-    info_sheet_wrapper.render(null)
-    info_sheet.classList.remove('active')
+    info_sheet_wrapper.render(null);
+    info_sheet.classList.remove('active');
+    info_sheet.removeAttribute('style')
+  }
+})
+const menu_tl = gsap.timeline({
+  paused: true, onReverseComplete: () => {
+    document.querySelector('.menu_top')?.removeAttribute('style')
   }
 })
 
@@ -55,6 +61,7 @@ function App() { // Главная страница
     info_sheet_wrapper = createRoot(info_sheet.querySelector('.wrapper')!)
     info_tl.to(info_sheet, { zIndex: 1000, duration: 0 })
       .to(info_sheet, { opacity: 1, duration: 0.25 })
+    menu_tl.to(document.querySelector('.menu_top'), { bottom: "unset", top: "50px", duration: 0.25 })
   })
   return (
     <>
@@ -67,7 +74,13 @@ function App() { // Главная страница
         <div className="menu_top"></div>
         <div className="top_bar">
           <div className="browse_button" style={{ width: "100px", backgroundColor: "brown" }}></div>
-          <div className="menu_button_top"></div>
+          <div className="menu_button_top" onClick={
+            () => {
+              const menu = document.querySelector('.menu_top')!
+              menu.classList.toggle('active')
+              menu_tl[menu.classList.contains('active') ? "play" : "reverse"]();
+            }
+          }></div>
         </div>
       </div>
       <div className="content_grid" active="Наши кальяны">

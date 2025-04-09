@@ -1,6 +1,5 @@
 import './Gallery.css'
-import { useEffect, useState } from 'react'
-import { hookahs_images_data } from '../../github.js'
+import { useState } from 'react'
 import { dataLocal } from '../../db.js'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -20,7 +19,7 @@ function Gallery({withSections, id}) {
         if (nextSection >= 0 && nextSection < images.length - 2) {
             var offset = 0
             var scrollTarget = images[nextSection] // first section
-            if (nextSection == images.length - 3) { // last section
+            if (nextSection === images.length - 3) { // last section
                 scrollTarget = images[nextSection + 2]
             } else if (nextSection > 0) { // middle sections
                 scrollTarget = images[nextSection + 1]
@@ -47,13 +46,13 @@ function Gallery({withSections, id}) {
     for (var i in hookah_data.photos) {
         for (var k = 0; k <= 6; k++) {
             images.push(
-                <img key={k} 
+                <img key={k} alt=''
                 className='preview_hookah_image' 
                 src={process.env.PUBLIC_URL + '/' + hookah_data.photos[i]} />
             )
             if (k > 0 && k < 6) {
                 progressBarSections.push(
-                    <div key={k} className={'section' + ' active'.repeat(k == 1)}></div>
+                    <div key={k} className={'section' + ' active'.repeat(k === 1)}></div>
                 )
             }
         }
