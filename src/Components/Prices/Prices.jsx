@@ -99,13 +99,12 @@ function PriceList({price_data}) {
                 ? '/' + time + ' часов'
                 : ''*/
 
-            const pos_div = (option == 0) 
-                ? <div className='position'>{pos[0].toUpperCase() + pos.slice(1)}</div>
-                : <></>
 
             price_list.push(
               <div key={pos + '_' + option} className="price_list_row">
-                {pos_div}
+                {(option == 0) 
+                  ? <div className='position'>{pos[0].toUpperCase() + pos.slice(1)}</div>
+                  : null}
                 <div className='price'>{price_output}</div>
               </div>
             )

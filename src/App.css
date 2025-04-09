@@ -152,15 +152,12 @@ body.edit_mode .editmode_toggle_button svg {
         gap: 10px;
     }
     &.hookahs {
-        display: block;
-        & .wrapper {
-            display: grid;
-            gap: 50px;
-            grid-template-columns: repeat(auto-fit, 250px);
-            background-image: url(./media/website_media/images/grid_bg.png);
-            align-items: center;
-            justify-items: center;
-        }
+      display: grid;
+      gap: 50px;
+      grid-template-columns: repeat(auto-fit, 250px);
+      background-image: url(./media/website_media/images/grid_bg.png);
+      align-items: center;
+      justify-items: center;
     }
     &.tobacco {
         display: grid;
@@ -172,22 +169,12 @@ body.edit_mode .editmode_toggle_button svg {
 }
 
 .info_sheet {
-    transition: opacity .25s;
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: #00000080;
     opacity: 0;
     z-index: -1;
-    animation: slideBack .25s;
-    &.active {
-        z-index: 1000;
-        animation: none;
-        opacity: 1;
-        & .info_box {
-            animation: slideUp .25s;
-        }
-    }
     & > .wrapper {
         overflow: hidden;
         width: 100%;
@@ -202,7 +189,6 @@ body.edit_mode .editmode_toggle_button svg {
 }
 .info_box {
     position: relative;
-    animation: slideDown .25s;
     border-radius: 25px;
     cursor: auto;
     width: min(100%, 1600px);
@@ -210,18 +196,6 @@ body.edit_mode .editmode_toggle_button svg {
     background-color: white;
     overflow: hidden;
     padding: 10px 10px 0;
-}
-
-@keyframes slideUp {
-    0% {bottom: -20%}
-    100% {bottom: 0}
-}
-@keyframes slideDown {
-    0% {bottom: 0}
-    100% {bottom: -20%}
-}
-@keyframes slideBack {
-    0% {z-index: 1000}
 }
 
 svg.edit_pencil {
