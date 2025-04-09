@@ -1,4 +1,5 @@
 const token = "g" + "it" + "hu" + "b_pa" + "t_11AWK4SAQ0kTdS" + "GkLnqzc5_JT6" + "kXt8V0cpSPqX6zP9" + "EiCjnGSv2" + "Cdqj4MF4xuh5eNqUSQAKKOOLpPlgvpU"
+console.log(process.env)
 const repopath = 'https://api.github.com/repos/C0R-PSE/keitering'
 
 const hookahs_images_data = await fetch(repopath + '/contents/images/hookahs', {

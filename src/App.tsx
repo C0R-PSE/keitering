@@ -1,20 +1,32 @@
 import './App.css';
-import { data } from './db';
 import { useGSAP } from '@gsap/react';
 import HookahGrid from './Components/HookahGrid/HookahGrid';
 import { Instructions, Questions } from './Components/Instructions/Instructions';
-import { useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { ReactElement } from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import Prices from './Components/Prices/Prices';
 import gsap from 'gsap';
 
-//console.log(dataLocal)
+declare module 'react' {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    active?: string;
+    tag?: string;
+  }
+}
 
-var info_sheet
-var info_sheet_wrapper
-const tl = gsap.timeline({ paused: true, onReverseComplete: () => info_sheet_wrapper.render() })
-export function show_info(content) {
-  tl.play()
+//console.log(dataLocal)
+var info_sheet: Element
+var info_sheet_wrapper: Root
+export const info_tl = gsap.timeline({
+  paused: true, onReverseComplete: () => {
+    info_sheet_wrapper.render(null)
+    info_sheet.classList.remove('active')
+  }
+})
+
+export function show_info(content: ReactElement) {
+  info_tl.play()
   info_sheet_wrapper.render(content)
   info_sheet.classList.add('active')
 }
@@ -22,32 +34,32 @@ export function show_info(content) {
 function App() { // Главная страница
   console.log('app rendered')
 
-  function open_tab(tab) {
-    const content_grid = document.querySelector('.content_grid')
-    const navigation = content_grid.querySelector('.navigation')
+  function open_tab(tab: String) {
+    const content_grid = document.querySelector('.content_grid')!
+    const navigation = content_grid.querySelector('.navigation')!
     const currently_active = [...content_grid.getElementsByClassName('active')]
     for (var i in currently_active) {
       currently_active[i].classList.remove('active')
     }
-    navigation.querySelector('[tag="' + tab + '"]').classList.add("active")
-    content_grid.querySelector('.content').querySelector('.' + tab).classList.add("active")
+    navigation.querySelector('[tag="' + tab + '"]')!.classList.add("active")
+    content_grid.querySelector('.content')!.querySelector('.' + tab)!.classList.add("active")
   }
 
   function hide_info() {
-    tl.reverse()
-    info_sheet.classList.remove('active')
+    info_tl.reverse()
   }
+
   useGSAP(() => { // onload events
     open_tab('hookahs')
-    info_sheet = document.querySelector('.info_sheet')
-    info_sheet_wrapper = createRoot(info_sheet.querySelector('.wrapper'))
-    tl.to(info_sheet, { zIndex: 1000, duration: 0 })
+    info_sheet = document.querySelector('.info_sheet')!
+    info_sheet_wrapper = createRoot(info_sheet.querySelector('.wrapper')!)
+    info_tl.to(info_sheet, { zIndex: 1000, duration: 0 })
       .to(info_sheet, { opacity: 1, duration: 0.25 })
   })
   return (
     <>
       <div className="info_sheet" onClick={(e) => {
-        if (e.target.classList.contains('wrapper')) { hide_info() }
+        if ((e.target as Element).classList.contains('wrapper')) { hide_info() }
       }}>
         <div className='wrapper'></div>
       </div>
@@ -77,7 +89,7 @@ function App() { // Главная страница
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default App;

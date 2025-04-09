@@ -1,17 +1,16 @@
 import './HookahCard.css'
 import { data } from '../../../db'
-import { show_info } from '../../../App'
+import { info_tl, show_info } from '../../../App.tsx'
 import Gallery from '../../Gallery/Gallery'
 import { ReactComponent as InfoIcon } from '../../../media/website_media/icons/icon.svg'
 import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
 import { useRef } from 'react'
 
 
 function HookahPreview({ id }) {
   const info_box = useRef()
   useGSAP(() => {
-    gsap.from(info_box.current, {translateY: "20%", duration: .25})
+    info_tl.from(info_box.current, {translateY: "20%", duration: .25}, "<")
     console.log('Hookah preview rendered')
     return(
       () => console.log('Hookah preview unmounted')
