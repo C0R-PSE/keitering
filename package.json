@@ -1,7 +1,7 @@
 {
   "name": "keitering",
   "version": "0.1.0",
-  "homepage": "https://c0r-pse.github.io/keitering",
+  "homepage": "https://c0r-pse.github.io",
   "private": true,
   "dependencies": {
     "@firebase/database": "^1.0.15",
