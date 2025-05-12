@@ -4,10 +4,10 @@ import { Context } from "../../App.tsx"
 import "./Infobox.css"
 
 function InfoBox({ children, type }: { children?: any, type?: string }) {
-  const context = useContext(Context)
+  const {info_tl} = useContext(Context)
   const info_box = useRef<any>(null)
   useGSAP(() => {
-    context.info_tl!.from(info_box.current, {
+    info_tl!.from(info_box.current, {
       translateY: "20%",
       duration: .25,
       onComplete: () => {

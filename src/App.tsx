@@ -5,19 +5,22 @@ import { Route, Routes, useLocation, useNavigate } from "react-router";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Admin, Orders, Keitering } from "./Pages/Pages";
-import { loadData } from './db.js'
+import { loadData } from './db'
 
 
 //gsap.registerPlugin(useGSAP, ScrollToPlugin);
 
 
+const dataPromise = loadData()
 
 
 export const Context = createContext<{
   info_sheet?: React.RefObject<any>,
   info_sheet_wrapper?: React.RefObject<any>,
   show_info?: (content: React.JSX.Element) => void,
-  info_tl?: gsap.core.Timeline
+  info_tl?: gsap.core.Timeline,
+  dataPromise?: typeof dataPromise,
+  open_tab?: (tab: string) => void
 }>({})
 
 function PageNotFound({ back }) {
@@ -31,8 +34,8 @@ function PageNotFound({ back }) {
 }
 
 function Test() {
-  const resp = loadData()
-  const data: { DBdata, dataLocal, data } = use(resp)
+  const dataPromise = loadData()
+  const data: { DBdata: {}, data: {} } = use(dataPromise)
   console.log(data)
   //<Suspense fallback={"loading"}><Test /></Suspense>
 
@@ -83,7 +86,7 @@ function App() {
       .to(info_sheet.current, { opacity: 1, duration: .25 })
   })
   return (
-    <Context value={{ show_info, info_tl }}>
+    <Context value={{ show_info, info_tl, dataPromise }}>
       <LocationHandler />
       <div className="info_sheet" ref={info_sheet} onClick={(e) => {
         if ((e.target as Element).classList.contains('wrapper')) { hide_info() }

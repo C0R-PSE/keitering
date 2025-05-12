@@ -97,8 +97,8 @@ export async function loadData() {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app, 'https://myapp-bb443-default-rtdb.europe-west1.firebasedatabase.app')
   
-  var DBdata
-  DBdata = await get(child(ref(db), 'data')).then((snapshot) => {
+  
+  let DBdata = await get(child(ref(db), 'data')).then((snapshot) => {
     if (snapshot.exists()) {
       return (snapshot.val())
     } else {
@@ -115,5 +115,4 @@ export async function loadData() {
     { DBdata, data }
   )
 }
-
-export const { DBdata, data } = loadData()
+console.log(loadData())

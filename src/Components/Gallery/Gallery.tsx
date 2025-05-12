@@ -1,6 +1,6 @@
 import './Gallery.css'
-import { useState } from 'react'
-import { dataLocal } from '../../db.js'
+import { useState, WheelEvent } from 'react'
+import { dataLocal } from '../../db'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollToPlugin } from 'gsap/all';
@@ -8,12 +8,12 @@ gsap.registerPlugin(useGSAP, ScrollToPlugin);
 
 function Gallery({ withSections, id }) {
   const [currentSection, updateSection] = useState(0)
-  function scroll_gallery(e) {
-    const gallery = e.target.closest('.gallery')
+  function scroll_gallery(e: WheelEvent) {
+    const gallery = (e.target as Element).closest('.gallery')!
     const images = [...gallery.children]
-    var inc = 1 * (e.deltaY > 0) - 1 * (e.deltaY < 1)
-    const wrapper = gallery.closest('.wrapper')
-    const sections = [...wrapper.querySelector('.sections').children]
+    var inc = 1 * Number(e.deltaY > 0) - 1 * Number(e.deltaY < 1)
+    const wrapper = gallery.closest('.wrapper')!
+    const sections = [...wrapper.querySelector('.sections')!.children]
     var nextSection = currentSection + inc
     if (nextSection >= 0 && nextSection < images.length - 2) {
       var offset = 0
@@ -38,9 +38,9 @@ function Gallery({ withSections, id }) {
     }
   }
   
-  let images = []
-  let progressBarSections = []
-  let sectionsElem = ''
+  const images: React.JSX.Element[] = []
+  const progressBarSections: React.JSX.Element[] = []
+  let sectionsElem: React.JSX.Element | undefined
   const hookah_data = dataLocal.hookahs[id]
   for (var i in hookah_data.photos) {
     for (var k = 0; k <= 6; k++) {
@@ -51,7 +51,7 @@ function Gallery({ withSections, id }) {
       )
       if (k > 0 && k < 6) {
         progressBarSections.push(
-          <div key={k} className={'section' + ' active'.repeat(k === 1)}></div>
+          <div key={k} className={'section' + ' active'.repeat(Number(k === 1))}></div>
         )
       }
     }
@@ -62,7 +62,7 @@ function Gallery({ withSections, id }) {
 
   return (
     <div className='wrapper'>
-      <div onWheel={(e) => scroll_gallery(e)} className="gallery">
+      <div onWheel={(e: WheelEvent) => scroll_gallery(e)} className="gallery">
         {images}
       </div>
       {sectionsElem}

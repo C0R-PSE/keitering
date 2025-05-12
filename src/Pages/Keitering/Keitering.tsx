@@ -2,9 +2,10 @@ import './Keitering.css';
 import { useGSAP } from '@gsap/react';
 import HookahGrid from '../../Components/HookahGrid/HookahGrid.jsx';
 import { Instructions, Questions } from '../../Components/Instructions/Instructions.jsx';
-import React from 'react';
+import React, { Suspense, useContext } from 'react';
 import Prices from '../../Components/Prices/Prices.tsx';
 import gsap from 'gsap';
+import { Context } from '../../App.tsx';
 gsap.registerPlugin(useGSAP);
 
 declare module 'react' {
@@ -23,7 +24,8 @@ const menu_tl = gsap.timeline({
 
 
 function Keitering() { // Главная страница
-  console.log('app rendered')
+  console.log('Keitering rendered')
+  const {dataPromise, show_info, info_tl} = useContext(Context)
 
   function open_tab(tab: String) {
     const content_grid = document.querySelector('.content_grid')!
@@ -38,11 +40,11 @@ function Keitering() { // Главная страница
 
 
   useGSAP(() => { // onload events
-    open_tab('hookahs')
+    //open_tab('hookahs')
     menu_tl.to(document.querySelector('.menu_top'), { bottom: "unset", top: "50px", duration: 0.25 })
   })
   return (
-    <>
+    <Context value={{dataPromise, open_tab, show_info, info_tl}}>
       <div className="sticky_sheet">
         <div className="menu_top"></div>
         <div className="top_bar">
@@ -67,14 +69,14 @@ function Keitering() { // Главная страница
           </div>
         </div>
         <div className="content">
-          <HookahGrid />
+          <Suspense fallback={<div className="hookahs"></div>}><HookahGrid /></Suspense>
           <div className="tobacco"></div>
           <div className="prices"><Prices /></div>
           <Instructions />
           <Questions />
         </div>
       </div>
-    </>
+    </Context>
   )
 }
 
