@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/keitering/static/css/main.ff4f9926.css",
+    "main.js": "/keitering/static/js/main.a18e2092.js",
+    "static/js/453.2c0b83a6.chunk.js": "/keitering/static/js/453.2c0b83a6.chunk.js",
+    "static/media/icon.svg": "/keitering/static/media/icon.417c51f4e2223b0852ab0c103bf02449.svg",
+    "index.html": "/keitering/index.html",
+    "main.ff4f9926.css.map": "/keitering/static/css/main.ff4f9926.css.map",
+    "main.a18e2092.js.map": "/keitering/static/js/main.a18e2092.js.map",
+    "453.2c0b83a6.chunk.js.map": "/keitering/static/js/453.2c0b83a6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff4f9926.css",
+    "static/js/main.a18e2092.js"
+  ]
+}
