@@ -1,13 +1,24 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router';
 
-const root = ReactDOM.createRoot(document.querySelector('body'));
-root.render(
-  <App />
-);
+
+/*const router = createBrowserRouter([
+  //{ path: "/keitering", element: <Keitering /> },
+  { path: "", element: <Keitering /> },
+  { path: "/admin", element: <Admin /> },
+  { path: "/admin/*", element: <PageNotFound back={"admin"} /> },
+  { path: "*", element: <PageNotFound back={""} /> },
+  { path: "/admin/orders/:type", element: <Orders /> }
+])*/
+
+ReactDOM.createRoot(document.querySelector('body')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,4 +1,4 @@
-import HookahCard from './HookahCard/HookahCard'
+import HookahCard from './HookahCard/HookahCard.jsx'
 import { data } from '../../db'
 import { useGSAP } from '@gsap/react'
 import { useState } from 'react'

@@ -1,0 +1,201 @@
+/*@import url(./normalize.css);*/
+
+.sticky_sheet {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 200;
+}
+
+.top_bar {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 10px;
+  height: 50px;
+  border-bottom: 2px solid #ccc;
+  gap: 20px;
+}
+
+.top_bar>.menu_button_top {
+  cursor: pointer;
+  background-image: repeating-linear-gradient(#000, #000 2px, transparent 2px 13px);
+  padding: 5px 0;
+  aspect-ratio: 1;
+  background-clip: content-box;
+  background-position: 0 5px;
+  margin-right: 20px;
+}
+
+.top_bar>.editmode_toggle_button {
+  display: none;
+}
+
+body.admin_rights .editmode_toggle_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  aspect-ratio: 1;
+  border-radius: 25px;
+  border: 2px solid black;
+}
+
+.top_bar>.editmode_toggle_button svg {
+  &.edit {
+    display: block;
+    width: 20px;
+    height: 100%;
+  }
+
+  &.done {
+    display: none;
+  }
+}
+
+body.edit_mode .editmode_toggle_button svg {
+  &.edit {
+    display: none;
+  }
+
+  &.done {
+    display: block;
+    width: 32px;
+    height: 28px;
+  }
+}
+
+.menu_top {
+  bottom: 0;
+  position: absolute;
+  height: 300px;
+  width: 400px;
+  right: 20px;
+  background-color: #fff;
+  border-right: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+}
+
+.content_grid {
+  display: grid;
+  grid-template-columns: 250px auto 250px;
+  gap: 75px;
+  width: min(100%, 1600px);
+  justify-self: center;
+  height: calc(100vh - 50px);
+  padding: 100px 50px;
+  overflow-y: auto;
+
+  .content {
+    width: 100%;
+  }
+
+  .content>div {
+    display: none;
+  }
+
+  .content>div.active {
+    &.prices {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      font-family: sans-serif;
+    }
+
+    &.instructions,
+    &.questions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &.hookahs {
+      display: grid;
+      gap: 50px;
+      grid-template-columns: repeat(auto-fit, 250px);
+      background-image: url(/src/media/website_media/images/grid_bg.png);
+      align-items: center;
+      justify-items: center;
+    }
+
+    &.tobacco {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, 200px);
+      align-items: center;
+      justify-items: center;
+    }
+  }
+
+}
+
+.navigation {
+  min-width: 250px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation>div {
+  transition: background .2s;
+  font-family: math;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 20px 0 15px;
+  width: 100%;
+  background-image: linear-gradient(#00000010 0 100%);
+  background-color: #f8f8f8;
+  background-position: -250px 0, 0 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12.5px;
+  background-repeat: no-repeat, repeat;
+}
+
+.navigation>div>.label {
+  padding: 5px;
+}
+
+.navigation>div:hover,
+.navigation>div.active {
+  background-position: 0 0, 0 0;
+}
+
+.navigation>div.active::after {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  content: '';
+}
+
+
+.tobacco_card {
+  font-size: 18px;
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+  border: 2px solid black;
+  display: flex;
+  border-radius: 20px;
+  height: 200px;
+  width: 200px;
+  flex-direction: column;
+  transition: transform .1s;
+  align-items: center;
+  justify-content: center;
+}

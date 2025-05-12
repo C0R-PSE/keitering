@@ -1,0 +1,35 @@
+.edit_order {
+  .form_grid {
+    display: grid;
+    grid-template-columns: 150px 300px;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      height: 32px;
+      border-radius: 5px;
+      outline: none;
+      border: 1px solid;
+    }
+  }
+
+  .save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: #00000000;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &:hover {
+      background-color: #00000010;
+    }
+
+    &:active {
+      background-color: #00000025;
+    }
+  }
+}
