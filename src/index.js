@@ -15,7 +15,7 @@ import { BrowserRouter } from 'react-router';
 ])*/
 
 ReactDOM.createRoot(document.querySelector('body')).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/keitering'>
     <App />
   </BrowserRouter>
 )

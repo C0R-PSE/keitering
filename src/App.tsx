@@ -4,7 +4,7 @@ import './App.css';
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Admin, Orders, Keitering } from "./Pages/Pages";
+import { Admin, Orders, Keitering, HomePage } from "./Pages/Pages";
 import { loadData } from './db'
 
 
@@ -95,7 +95,8 @@ function App() {
       </div>
       <div className='content_wrapper'>
         <Routes>
-          <Route path="" element={<Keitering />}></Route>
+          <Route path="" element={<HomePage />}></Route>
+          <Route path="/keitering" element={<Keitering />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/admin/*" element={<PageNotFound back={"admin"} />}></Route>
           <Route path="*" element={<PageNotFound back={""} />}></Route>
