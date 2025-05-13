@@ -1,11 +1,15 @@
-name: Test
+name: Master
 on:
+  push:
+    branches:
+      - master
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: '0 8 1 * *'
 jobs:
-  my_job:
-    name: test
+  build:
     runs-on: ubuntu-latest
     steps:
-    - run:
-        echo "running"
+    - uses: actions/checkout@v1
+    - name: Running
+      run: |
+        echo "Running!"
