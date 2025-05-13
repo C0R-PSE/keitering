@@ -1,0 +1,11 @@
+name: Test
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  my_job:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - run:
+        echo "running"
